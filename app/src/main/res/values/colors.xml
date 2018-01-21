@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#46c8ff</color>
+    <color name="colorPrimaryDark">#23aee8</color>
+    <color name="colorAccent">#adb4d1</color>
+    <color name="colorAccent2">#f4f5f9</color>
+
+    <color name="selectdot">#109DD9</color>
+
+
+    <color name="one">#7CC634</color>
+    <color name="two">#FF3E18</color>
+    <color name="three">#FFAC2B</color>
+    <color name="four">#00E7C2</color>
+    <color name="five">#0ED5E1</color>
+    <color name="six">#7CC634</color>
+    <color name="seven">#FF3E18</color>
+    <color name="eight">#FFAC2B</color>
+
+
+
+
+
+    <color name="white">#ffffff</color>
+    <color name="trancparent">#00000000</color>
+
+
+</resources>
