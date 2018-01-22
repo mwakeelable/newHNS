@@ -17,7 +17,7 @@
 package com.example.newhns.domain.usecase;
 
 
-import com.ntgclarity.yallofullfilmentapp.util.EspressoIdlingResource;
+import com.example.newhns.utils.EspressoIdlingResource;
 
 /**
  * Runs {@link UseCase}s using a {@link UseCaseScheduler}.

@@ -5,10 +5,13 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.newhns.R;
 import com.example.newhns.data.GenerericResponseModel;
@@ -33,36 +36,29 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
         doInjection();
     }
 
+    RelativeLayout btnLogin;
+    EditText emailTXT, passwordTXT;
+
     private void initViews() {
-        TextView text1 = (TextView) findViewById(R.id.label);
-        TextView text2 = (TextView) findViewById(R.id.textView);
-        TextView text3 = (TextView) findViewById(R.id.textView01);
-
-        final TextView login = (TextView) findViewById(R.id.textView5);
-        TextView forget = (TextView) findViewById(R.id.textView4);
-        TextView parent = (TextView) findViewById(R.id.textView2);
-
-
-        final EditText username = (EditText) findViewById(R.id.editText);
-        final EditText password = (EditText) findViewById(R.id.editText01);
-
-
+        btnLogin = findViewById(R.id.btnLogin);
+        emailTXT = findViewById(R.id.emailTXT);
+        passwordTXT = findViewById(R.id.passwordTXT);
+        TextView text1 = findViewById(R.id.label);
+        TextView text2 = findViewById(R.id.textView);
+        TextView text3 = findViewById(R.id.textView01);
+        final TextView login = findViewById(R.id.textView5);
+        TextView forget = findViewById(R.id.textView4);
+        TextView parent = findViewById(R.id.textView2);
         text1.setTypeface(UIManager.tf, Typeface.NORMAL);
         text2.setTypeface(UIManager.tf, Typeface.NORMAL);
         text3.setTypeface(UIManager.tf, Typeface.NORMAL);
-
-
         login.setTypeface(UIManager.tf, Typeface.NORMAL);
         forget.setTypeface(UIManager.tf, Typeface.NORMAL);
         parent.setTypeface(UIManager.tf, Typeface.NORMAL);
-
-
-        username.setTypeface(UIManager.tf, Typeface.NORMAL);
-        password.setTypeface(UIManager.tf, Typeface.NORMAL);
-
+        emailTXT.setTypeface(UIManager.tf, Typeface.NORMAL);
+        passwordTXT.setTypeface(UIManager.tf, Typeface.NORMAL);
         progressBar = (ProgressBar) findViewById(R.id.progressn);
-
-        login.setOnClickListener(this);
+        btnLogin.setOnClickListener(this);
         forget.setOnClickListener(this);
     }
 
@@ -75,19 +71,29 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.textView5:
+            case R.id.btnLogin:
                 //DoLogin
+                if (emailTXT.getEditableText().toString().equals("") || passwordTXT.getEditableText().toString().equals("")) {
+                    Toast.makeText(LoginActivity.this, "Missing Data", Toast.LENGTH_SHORT).show();
+                } else {
+                    String username = emailTXT.getEditableText().toString();
+                    String password = passwordTXT.getEditableText().toString();
+                    String grantType = "password";
+
+                    loginPresenter.getUserToken(true, username, password, grantType);
+                }
         }
     }
 
     @Override
     public void getUserTokenSuccess(LoginTokenResponseModel resp) {
-
+        Toast.makeText(LoginActivity.this, resp.getAccessToken(), Toast.LENGTH_SHORT);
+        Log.d("Token", resp.getAccessToken());
     }
 
     @Override
     public void showErrorMessage(GenerericResponseModel msg) {
-
+        Toast.makeText(LoginActivity.this, msg.getMessage(), Toast.LENGTH_SHORT);
     }
 
     @Override

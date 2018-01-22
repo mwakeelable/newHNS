@@ -25,12 +25,9 @@ public class LoginPresenter implements LoginContract.LoginPresenter {
     @Override
     public void getUserToken(Boolean showLoadingUI, String username, String password, String grantType) {
         if (showLoadingUI && logView.isActive()) {
-
             logView.setLoadingIndicator(true);
-
         }
         LoginGetTokenUseCase.LoginGetTokenRequestValues requestValues = new LoginGetTokenUseCase.LoginGetTokenRequestValues(username, password, grantType);
-
         useCaseHandler.execute(loginGetTokenUseCase, requestValues, new UseCase.UseCaseCallback<LoginGetTokenUseCase.LoginGetTokenResponseValue>() {
             @Override
             public void onSuccess(LoginGetTokenUseCase.LoginGetTokenResponseValue response) {
